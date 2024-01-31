@@ -3,4 +3,4 @@ def info(message){
     echo "printing the value of message ${message}"
 } 
 
-info(message "Hello")
+info("Hello")
