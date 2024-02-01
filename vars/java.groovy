@@ -21,7 +21,7 @@ def call(COMPONENT){
         }
         stage('Code Complie'){
             steps{
-                sh "npm install"
+                sh "mvn clean compile"
             }
         }
     }
