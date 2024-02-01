@@ -1,8 +1,7 @@
 def Lintcheck(){
    sh '''
-       echo Performing lintcheck for  ${COMPONENT}
-       #pip3 install pylint
-       echo lint checks completed for ${COMPONENT}
+        echo Performing lintcheck for  ${COMPONENT}
+        echo lint checks completed for ${COMPONENT}
     '''            
 }                
 
@@ -21,7 +20,7 @@ def call(COMPONENT){
         }
         stage('Code Complie'){
             steps{
-                //sh "npm install"
+                //sh "mvn clean compile"
             }
         }
     }
