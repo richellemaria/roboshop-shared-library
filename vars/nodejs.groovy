@@ -15,7 +15,7 @@ def call(){
         stage('Lint Check'){
             steps{
                 script{
-                 nodejs.Lintcheck()
+                  Lintcheck()
                 }
             }
         }
