@@ -18,7 +18,7 @@ def call(COMPONENT){
                 }
             }
         }
-        stage('Code Complie'){
+        stage('Code Quality analysis'){
             steps{
                 //sh "mvn clean compile"
             }
