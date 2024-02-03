@@ -14,15 +14,25 @@ def call(COMPONENT){
         stage('Lint Check'){
             steps{
                 script{
+                  env.ARGS="-Dsonar.source=."  
                   Lintcheck()
                 }
             }
         }
-        stage('Code Quality analysis'){
+        stage('Sonar check'){
             steps{
-                //sh "mvn clean compile"
+                script{
+                  env.ARGS="-Dsonar.source=."  
+                  common.Sonarcheck()
+                }
             }
         }
+        stage('Testing'){
+            steps{
+                sh "echo testing inprogress"
+            }
+        }
+    }
     }
     } 
 } 

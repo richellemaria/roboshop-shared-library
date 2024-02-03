@@ -11,6 +11,10 @@ def call(COMPONENT){
     agent {
         label 'WS'
     }
+    enivronment{
+        SONARCRED=credentials('SONARCRED')
+        SONARURL="172.31.6.159"
+    }
     stages{
         stage('Lint Check'){
             steps{
@@ -22,6 +26,19 @@ def call(COMPONENT){
         stage('Code Complie'){
             steps{
                 sh "mvn clean compile"
+            }
+        }
+        stage('Sonar check'){
+            steps{
+                script{
+                  env.ARGS="-Dsonar.java.binaries=target/"
+                  common.Sonarcheck()
+                }
+            }
+        }
+        stage('Testing'){
+            steps{
+                sh "echo testing inprogress"
             }
         }
     }

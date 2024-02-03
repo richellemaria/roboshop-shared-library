@@ -26,6 +26,7 @@ def call(COMPONENT){
         stage('Sonar check'){
             steps{
                 script{
+                  env.ARGS="-Dsonar.source=."  
                   common.Sonarcheck()
                 }
             }
