@@ -14,6 +14,7 @@ def call(COMPONENT){
     }
     enivronment{
         SONARCRED=credentials('SONARCRED')
+        NEXUS=credentials('NEXUS')
         SONARURL="172.31.6.159"
     }
     stages{
@@ -57,6 +58,22 @@ def call(COMPONENT){
                         sh "echo Functional testinbg completed" 
                     }
                 }
+            }
+        }
+        stage('Perpare the artifacts'){
+            when{ expression { env.TAG_NAME != null } }
+            steps{
+                sh "echo Prepare artifacts ${COMPONENT}"
+                sh "npm install"
+                sh "zip ${COMPONENT}.zip node_modules server.js"
+            }
+        }
+        stage('upload Artifacts'){
+            when{ expression { env.TAG_NAME != null } }
+            steps{
+                sh "echo Uploading artifacts to nexus"
+                sh "curl -v -u ${NEXUS_USR}:${NEXUS_PSW} --upload -file ${COMPOMENT}.${TAG_NAME}.zip http://localhost:8081/repository/${COMPOMENT}/${COMPOMENT}.${TAG_NAME}.zip"
+                sh "echo Uploading artifacts to nexus is completed"
             }
         }
     }
