@@ -1,10 +1,10 @@
-def Lintcheck(){
-   sh '''
-        echo installing jslint ${COMPONENT}
-        npm i jslint
-        node_modules/jslint/bin/jslint.js server.js || true
-    '''            
-}  
+// def Lintcheck(){
+//    sh '''
+//         echo installing jslint ${COMPONENT}
+//         npm i jslint
+//         node_modules/jslint/bin/jslint.js server.js || true
+//     '''            
+// }  
 
 def call()
 {
