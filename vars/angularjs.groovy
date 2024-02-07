@@ -1,8 +1,13 @@
 def call(){
     node{
+        env.APP_TYPE="angularjs"
         common.LintCheck()
         env.ARGS="-Dsonar.source=."  
         common.Sonarcheck()
+        common.testCases()
+        if(env.TAG_NAME != null) {
+            common.artifacts()
+        }
 
     }
 }

@@ -1,10 +1,14 @@
 def call(){
  node{
+   git branch: 'main', url: "https://github.com/b54-clouddevops/${COMPONENT}.git"
    env.APP_TYPE="java"
     common.Lintcheck()
     env.ARGS="-Dsonar.java.binaries=target/"
     common.Sonarcheck()
     common.testCases()
+    if(env.TAG_NAME != null) {
+            common.artifacts()
+        }
  }
 }
 

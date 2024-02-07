@@ -14,6 +14,9 @@ def call()
         env.ARGS="-Dsonar.source=."  
         common.Sonarcheck()
         common.testCases()
+        if(env.TAG_NAME != null) {
+            common.artifacts()
+        }
     }
 }
 

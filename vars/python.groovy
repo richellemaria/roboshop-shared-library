@@ -1,10 +1,13 @@
 def call(){
  node{
-     env.APP_TYPE="nodejs"
+     env.APP_TYPE="python"
      common.Lintcheck()
      env.ARGS="-Dsonar.source=."  
      common.Sonarcheck()
      common.testCases()
+     if(env.TAG_NAME != null) {
+            common.artifacts()
+        }
  }
 }
 
