@@ -32,9 +32,28 @@ def Lintcheck(){
 }
 
 def Sonarcheck(){
-        sh "echo Sonar check Inprogress"
-        sh "sonar-scanner -Dsonar.login=admin -Dsonar.password=password -Dsonar.host.url=http://172.31.6.159:9000 -Dsonar.projectKey=${COMPONENT} ${ARGS}"
-        sh "curl https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/sonar-scanner/quality-gate > sonar.quality.gate.sh"
-        sh "sonar.quality.gate.sh ${SONARCRED_USR} ${SONARCRED_PSW} ${SONARURL} ${COMPONENT} | true"
-        sh "echo Sonar check Completed"            
+        stage('Sonar check') {
+                sh "echo Sonar check Inprogress"
+                sh "sonar-scanner -Dsonar.login=admin -Dsonar.password=password -Dsonar.host.url=http://172.31.6.159:9000 -Dsonar.projectKey=${COMPONENT} ${ARGS}"
+                sh "curl https://gitlab.com/thecloudcareers/opensource/-/raw/master/lab-tools/sonar-scanner/quality-gate > sonar.quality.gate.sh"
+                sh "sonar.quality.gate.sh ${SONARCRED_USR} ${SONARCRED_PSW} ${SONARURL} ${COMPONENT} | true"
+                sh "echo Sonar check Completed"   
+        }         
 } 
+
+def testCases(){
+        stage('Test Cases'){
+                def stages = [:]
+
+                stages["Unit Testing"] = {
+                        echo "unit testinng for ${COMPONENT}"
+                }
+                stages["Intergration Testing"] = {
+                        echo "Intergration testinng for ${COMPONENT}"
+                }
+                stages["Functional Testing"] = {
+                        echo "Functional testinng for ${COMPONENT}"
+                }
+                parallel(stages)   
+        }
+}

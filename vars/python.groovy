@@ -1,8 +1,14 @@
 def call(){
  node{
-   common.Lintcheck()
+     env.APP_TYPE="nodejs"
+     common.Lintcheck()
+     env.ARGS="-Dsonar.source=."  
+     common.Sonarcheck()
+     common.testCases()
  }
 }
+
+
 
 // def Lintcheck(){
 //    sh '''

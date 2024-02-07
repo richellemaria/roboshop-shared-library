@@ -9,7 +9,11 @@
 def call()
 {
     node {
+        env.APP_TYPE="nodejs"
         common.LintCheck()
+        env.ARGS="-Dsonar.source=."  
+        common.Sonarcheck()
+        common.testCases()
     }
 }
 
